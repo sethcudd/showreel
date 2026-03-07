@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://unpkg.com/wavesurfer.js@7/dist/wavesurfer.min.js"></script>
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: transparent;
+      overflow: hidden;
+    }
+
+    .wrap {
+      width: 100%;
+      padding: 0;
+      margin: 0;
+    }
+
+    #waveform {
+      width: 100%;
+      height: 128px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div id="waveform"></div>
+  </div>
+
+  <script>
+    window.addEventListener("load", function () {
+      WaveSurfer.create({
+        container: "#waveform",
+        height: 128,
+        normalize: false,
+        waveColor: "#F3EFE6",
+        progressColor: "#0E1A2B",
+        cursorColor: "#B79A5B",
+        cursorWidth: 2,
+        fillParent: true,
+        mediaControls: true,
+        interact: true,
+        dragToSeek: false,
+        hideScrollbar: false,
+        autoScroll: true,
+        autoCenter: true,
+        sampleRate: 8000,
+        url: "https://www.dropbox.com/scl/fi/7uu3l6821pw89xhttefxv/Showreel-Medley.mp3?rlkey=jej5xe2uiqrg2ihui33w7b0iv&raw=1"
+      });
+    });
+  </script>
+</body>
+</html>
