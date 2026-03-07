@@ -9,15 +9,44 @@
     html, body {
       margin: 0;
       padding: 0;
-      background: transparent;
+      background: #0E1A2B;
       overflow: hidden;
       font-family: Arial, sans-serif;
     }
 
     .player-wrap {
       width: 100%;
-      padding: 0;
-      margin: 0;
+      padding: 18px 18px 12px 18px;
+      box-sizing: border-box;
+      background: #0E1A2B;
+      color: #F3EFE6;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    button {
+      appearance: none;
+      border: 1px solid #B79A5B;
+      background: transparent;
+      color: #F3EFE6;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: rgba(183, 154, 91, 0.12);
+    }
+
+    .label {
+      font-size: 14px;
+      opacity: 0.9;
     }
 
     #waveform {
@@ -29,12 +58,19 @@
 </head>
 <body>
   <div class="player-wrap">
+    <div class="topbar">
+      <button id="playBtn" type="button">Play</button>
+      <div class="label">Showreel Medley</div>
+    </div>
+
     <div id="waveform"></div>
   </div>
 
   <script>
     window.addEventListener("load", function () {
-      WaveSurfer.create({
+      const playBtn = document.getElementById("playBtn");
+
+      const wavesurfer = WaveSurfer.create({
         container: "#waveform",
         height: 128,
         normalize: true,
@@ -47,6 +83,28 @@
         autoScroll: true,
         autoCenter: true,
         url: "./Showreel-Medley.mp3"
+      });
+
+      playBtn.addEventListener("click", function () {
+        wavesurfer.playPause();
+      });
+
+      wavesurfer.on("play", function () {
+        playBtn.textContent = "Pause";
+      });
+
+      wavesurfer.on("pause", function () {
+        playBtn.textContent = "Play";
+      });
+
+      wavesurfer.on("finish", function () {
+        playBtn.textContent = "Play";
+      });
+
+      wavesurfer.on("interaction", function () {
+        if (!wavesurfer.isPlaying()) {
+          wavesurfer.play();
+        }
       });
     });
   </script>
