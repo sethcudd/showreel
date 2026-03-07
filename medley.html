@@ -3,82 +3,51 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Showreel Medley Test</title>
+  <title>Showreel Medley</title>
   <script src="https://unpkg.com/wavesurfer.js@7/dist/wavesurfer.min.js"></script>
   <style>
     html, body {
       margin: 0;
-      padding: 20px;
-      background: #0E1A2B;
-      color: #F3EFE6;
+      padding: 0;
+      background: transparent;
+      overflow: hidden;
       font-family: Arial, sans-serif;
     }
 
-    h1 {
-      margin: 0 0 16px 0;
-      font-size: 20px;
+    .player-wrap {
+      width: 100%;
+      padding: 0;
+      margin: 0;
     }
 
     #waveform {
       width: 100%;
       height: 128px;
-      margin: 16px 0;
-      border: 1px solid rgba(243,239,230,0.2);
-      background: rgba(243,239,230,0.03);
-    }
-
-    audio {
-      width: 100%;
-      margin-top: 16px;
-    }
-
-    .note {
-      margin-top: 16px;
-      font-size: 14px;
-      opacity: 0.85;
+      cursor: pointer;
     }
   </style>
 </head>
 <body>
-  <h1>WaveSurfer Test</h1>
-
-  <div id="waveform"></div>
-
-  <audio controls>
-    <source src="./Showreel-Medley.mp3" type="audio/mpeg">
-  </audio>
-
-  <div class="note" id="status">Loading waveform...</div>
+  <div class="player-wrap">
+    <div id="waveform"></div>
+  </div>
 
   <script>
     window.addEventListener("load", function () {
-      const status = document.getElementById("status");
-
-      try {
-        const wavesurfer = WaveSurfer.create({
-          container: "#waveform",
-          height: 128,
-          normalize: true,
-          waveColor: "#F3EFE6",
-          progressColor: "#0E1A2B",
-          cursorColor: "#B79A5B",
-          cursorWidth: 2,
-          fillParent: true,
-          interact: true,
-          mediaControls: false,
-          url: "./Showreel-Medley.mp3"
-        });
-
-        wavesurfer.on("ready", function () {
-          status.textContent = "Waveform loaded successfully.";
-        });
-
-        wavesurfer.on("error", function (err) {
-          status.textContent = "WaveSurfer error: " + err;
-        });
-      } catch (e) {
-        status.textContent = "Script error: " + e.message;
-      }
+      WaveSurfer.create({
+        container: "#waveform",
+        height: 128,
+        normalize: true,
+        waveColor: "#F3EFE6",
+        progressColor: "#B79A5B",
+        cursorColor: "#F3EFE6",
+        cursorWidth: 2,
+        fillParent: true,
+        interact: true,
+        autoScroll: true,
+        autoCenter: true,
+        url: "./Showreel-Medley.mp3"
+      });
     });
   </script>
 </body>
