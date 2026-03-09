@@ -308,19 +308,6 @@
         status.textContent = "Error loading medley: " + err;
 }
       });
-
-            const firstTrack = trackRows[0];
-
-if (firstTrack) {
-  const file = firstTrack.dataset.file;
-  const title = firstTrack.dataset.title;
-  const subtitle = firstTrack.dataset.subtitle || "";
-
-  firstTrack.classList.add("active");
-  playlistLabel.textContent = title;
-  status.textContent = subtitle ? subtitle : "Ready to play.";
-
-  playlistPlayer.load(file);
     });
   </script>
 </body>
