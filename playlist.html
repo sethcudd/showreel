@@ -306,8 +306,10 @@
 
       medleyPlayer.on("error", function (err) {
         status.textContent = "Error loading medley: " + err;
+}
+      });
 
-        const firstTrack = trackRows[0];
+            const firstTrack = trackRows[0];
 
 if (firstTrack) {
   const file = firstTrack.dataset.file;
@@ -319,8 +321,6 @@ if (firstTrack) {
   status.textContent = subtitle ? subtitle : "Ready to play.";
 
   playlistPlayer.load(file);
-}
-      });
     });
   </script>
 </body>
