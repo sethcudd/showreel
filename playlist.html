@@ -259,7 +259,6 @@
           </div>
         </div>
 
-        <div id="status" class="status">Playlist ready.</div>
       </div>
     </div>
 
@@ -271,7 +270,6 @@
       const playlistBtn = document.getElementById("playlistBtn");
       const playlistLabel = document.getElementById("playlistLabel");
       const playlistDesc = document.getElementById("playlistDesc");
-      const status = document.getElementById("status");
       const trackRows = Array.from(document.querySelectorAll(".track-row"));
 
       function formatTime(seconds) {
@@ -392,7 +390,6 @@
 
           playlistLabel.textContent = title;
           playlistDesc.textContent = subtitle ? subtitle : "";
-          status.textContent = "Loaded.";
 
           playlistPlayer.load(file);
         });
@@ -408,7 +405,6 @@
         firstTrack.classList.add("active");
         playlistLabel.textContent = title;
         playlistDesc.textContent = subtitle ? subtitle : "";
-        status.textContent = "Ready to play.";
 
         playlistPlayer.load(file);
       }
@@ -418,11 +414,9 @@
       });
 
       playlistPlayer.on("error", function (err) {
-        status.textContent = "Error loading track: " + err;
       });
 
       medleyPlayer.on("error", function (err) {
-        status.textContent = "Error loading medley: " + err;
       });
     });
   </script>
