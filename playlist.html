@@ -68,6 +68,19 @@
       opacity: 0.95;
     }
 
+    .selected-track-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .selected-track-desc {
+      font-size: 12px;
+      color: rgba(243, 239, 230, 0.72);
+      line-height: 1.35;
+    }
+
     .waveform {
       width: 100%;
       height: 128px;
@@ -124,6 +137,9 @@
       font-size: 12px;
       color: #B79A5B;
       white-space: nowrap;
+      min-width: 42px;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
     }
 
     .status {
@@ -147,21 +163,19 @@
         <div id="medleyWave" class="waveform"></div>
       </div>
     </div>
-    
 
     <div class="section">
       <h2>Selected Cues</h2>
       <div class="player-box">
         <div class="topbar">
-  <button id="playlistBtn" class="play-btn" type="button">Play</button>
+          <button id="playlistBtn" class="play-btn" type="button">Play</button>
+          <div class="selected-track-meta">
+            <div id="playlistLabel" class="track-label">Select a Track</div>
+            <div id="playlistDesc" class="selected-track-desc">Choose a cue from the list below.</div>
+          </div>
+        </div>
 
-  <div class="selected-track-meta">
-    <div id="playlistLabel" class="track-label">Select a Track</div>
-    <div id="playlistDesc" class="selected-track-desc">Choose a cue from the list below.</div>
-  </div>
-</div>
-
-<div id="playlistWave" class="waveform"></div>
+        <div id="playlistWave" class="waveform"></div>
 
         <div class="playlist" id="playlist">
           <div class="track-row" data-file="./01%20BLACK%20BAGS%20%20-%20%20I%20Get%20to%20Wear%20Nice%20Gloves.mp3" data-title="BLACK BAGS - I Get to Wear Nice Gloves" data-subtitle="Lyrical / reflective">
@@ -170,7 +184,7 @@
               <div class="track-subtitle">Upbeat, Calm, and Reflective</div>
             </div>
             <div class="track-action"></div>
-    </div>
+          </div>
 
           <div class="track-row" data-file="./02%20BLACK%20BAGS%20%20-%20%20Boone%2C%20End%20of%20the%20Line.mp3" data-title="BLACK BAGS - Boone, End of the Line" data-subtitle="Suspense / tension">
             <div class="track-info">
@@ -187,66 +201,67 @@
             </div>
             <div class="track-action"></div>
           </div>
-            
-           <div class="track-row" data-file="./04%20IT%20ECHOES%20%20-%20%20I%20See%20Her%20in%20the%20Echoes%20(Beginning).mp3" data-title="IT ECHOS - I See Her in the Echo (Beginning)" data-subtitle="Action / orchestral">
+
+          <div class="track-row" data-file="./04%20IT%20ECHOES%20%20-%20%20I%20See%20Her%20in%20the%20Echoes%20(Beginning).mp3" data-title="IT ECHOS - I See Her in the Echo (Beginning)" data-subtitle="Action / orchestral">
             <div class="track-info">
               <div class="track-title">4. IT ECHOS - I See Her in the Echo (Beginning)</div>
               <div class="track-subtitle">Action / orchestral</div>
             </div>
             <div class="track-action"></div>
           </div>
-          
-           <div class="track-row" data-file="./05%20IT%20ECHOES%20%20-%20%20I%20See%20Her%20in%20the%20Echoes%20(Ending).mp3" data-title="IT ECHOS - I See Her in the Echo (Ending)" data-subtitle="Action / orchestral">
+
+          <div class="track-row" data-file="./05%20IT%20ECHOES%20%20-%20%20I%20See%20Her%20in%20the%20Echoes%20(Ending).mp3" data-title="IT ECHOS - I See Her in the Echo (Ending)" data-subtitle="Action / orchestral">
             <div class="track-info">
               <div class="track-title">5. IT ECHOS - I See Her in the Echo (Ending</div>
               <div class="track-subtitle">Action / orchestral</div>
             </div>
             <div class="track-action"></div>
           </div>
-          
-           <div class="track-row" data-file="./06%20BLACK%20BAGS%20%20-%20%20Cope.mp3" data-title="BLACK BAGS - Cope" data-subtitle="Action / orchestral">
+
+          <div class="track-row" data-file="./06%20BLACK%20BAGS%20%20-%20%20Cope.mp3" data-title="BLACK BAGS - Cope" data-subtitle="Action / orchestral">
             <div class="track-info">
               <div class="track-title">6. BLACK BAGS - Cope</div>
               <div class="track-subtitle">Action / orchestral</div>
             </div>
             <div class="track-action"></div>
           </div>
-          
-           <div class="track-row" data-file="./07%20BLACK%20BAGS%20%20-%20%20The%20Phone.mp3" data-title="BLACK BAGS - The Phone" data-subtitle="Action / orchestral">
+
+          <div class="track-row" data-file="./07%20BLACK%20BAGS%20%20-%20%20The%20Phone.mp3" data-title="BLACK BAGS - The Phone" data-subtitle="Action / orchestral">
             <div class="track-info">
               <div class="track-title">7. BLACK BAGS - The Phone</div>
               <div class="track-subtitle">Action / orchestral</div>
             </div>
             <div class="track-action"></div>
           </div>
-               
-           <div class="track-row" data-file="./08%20BLACK%20BAGS%20%20-%20%20The%20Chase.mp3" data-title="BLACK BAGS - The Chase" data-subtitle="Action / orchestral">
+
+          <div class="track-row" data-file="./08%20BLACK%20BAGS%20%20-%20%20The%20Chase.mp3" data-title="BLACK BAGS - The Chase" data-subtitle="Action / orchestral">
             <div class="track-info">
               <div class="track-title">8. BLACK BAGS - The Chas</div>
               <div class="track-subtitle">Action / orchestral</div>
             </div>
             <div class="track-action"></div>
           </div>
-                
-           <div class="track-row" data-file="./09%20BLACK%20BAGS%20%20-%20%20Why%20Me%3F.mp3" data-title="BLACK BAGS - Why Me?" data-subtitle="Action / orchestral">
+
+          <div class="track-row" data-file="./09%20BLACK%20BAGS%20%20-%20%20Why%20Me%3F.mp3" data-title="BLACK BAGS - Why Me?" data-subtitle="Action / orchestral">
             <div class="track-info">
               <div class="track-title">9. BLACK BAGS - Why Me?</div>
               <div class="track-subtitle">Action / orchestral</div>
             </div>
             <div class="track-action"></div>
           </div>
-              
-           <div class="track-row" data-file="./10%20Breaking%20Fire.mp3" data-title="Breaking Fire" data-subtitle="Action / orchestral">
+
+          <div class="track-row" data-file="./10%20Breaking%20Fire.mp3" data-title="Breaking Fire" data-subtitle="Action / orchestral">
             <div class="track-info">
               <div class="track-title">10. Breaking Fire</div>
               <div class="track-subtitle">Action / orchestral</div>
             </div>
             <div class="track-action"></div>
           </div>
-          </div>
-          
+        </div>
+
         <div id="status" class="status">Playlist ready.</div>
       </div>
+    </div>
 
   </div>
 
@@ -255,8 +270,16 @@
       const medleyBtn = document.getElementById("medleyBtn");
       const playlistBtn = document.getElementById("playlistBtn");
       const playlistLabel = document.getElementById("playlistLabel");
+      const playlistDesc = document.getElementById("playlistDesc");
       const status = document.getElementById("status");
       const trackRows = Array.from(document.querySelectorAll(".track-row"));
+
+      function formatTime(seconds) {
+        if (!isFinite(seconds)) return "--:--";
+        const mins = Math.floor(seconds / 60);
+        const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
+        return `${mins}:${secs}`;
+      }
 
       const medleyPlayer = WaveSurfer.create({
         container: "#medleyWave",
@@ -341,6 +364,23 @@
       });
 
       trackRows.forEach(function (row) {
+        const action = row.querySelector(".track-action");
+        const file = row.dataset.file;
+
+        if (action) action.textContent = "--:--";
+
+        const audio = new Audio();
+        audio.preload = "metadata";
+        audio.src = file;
+
+        audio.addEventListener("loadedmetadata", function () {
+          if (action) action.textContent = formatTime(audio.duration);
+        });
+
+        audio.addEventListener("error", function () {
+          if (action) action.textContent = "--:--";
+        });
+
         row.addEventListener("click", function () {
           const file = row.dataset.file;
           const title = row.dataset.title;
@@ -351,7 +391,8 @@
           row.classList.add("active");
 
           playlistLabel.textContent = title;
-          status.textContent = subtitle ? subtitle : "Loaded.";
+          playlistDesc.textContent = subtitle ? subtitle : "";
+          status.textContent = "Loaded.";
 
           playlistPlayer.load(file);
         });
@@ -359,17 +400,19 @@
 
       const firstTrack = trackRows[0];
 
-if (firstTrack) {
-  const file = firstTrack.dataset.file;
-  const title = firstTrack.dataset.title;
-  const subtitle = firstTrack.dataset.subtitle || "";
+      if (firstTrack) {
+        const file = firstTrack.dataset.file;
+        const title = firstTrack.dataset.title;
+        const subtitle = firstTrack.dataset.subtitle || "";
 
-  firstTrack.classList.add("active");
-  playlistLabel.textContent = title;
-  status.textContent = subtitle ? subtitle : "Ready to play.";
+        firstTrack.classList.add("active");
+        playlistLabel.textContent = title;
+        playlistDesc.textContent = subtitle ? subtitle : "";
+        status.textContent = "Ready to play.";
 
-  playlistPlayer.load(file);
-}
+        playlistPlayer.load(file);
+      }
+
       playlistPlayer.on("ready", function () {
         playlistPlayer.play();
       });
@@ -380,7 +423,6 @@ if (firstTrack) {
 
       medleyPlayer.on("error", function (err) {
         status.textContent = "Error loading medley: " + err;
-        
       });
     });
   </script>
