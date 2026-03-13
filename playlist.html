@@ -13,6 +13,16 @@
       color: #F3EFE6;
       font-family: Arial, sans-serif;
     }
+    .fade-in {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
 
     .wrap {
       max-width: 900px;
@@ -153,7 +163,7 @@
 <body>
   <div class="wrap">
 
-    <div class="section">
+<div class="section fade-in">
       <h2>Medley</h2>
       <div class="player-box">
         <div class="topbar">
@@ -164,7 +174,7 @@
       </div>
     </div>
 
-    <div class="section">
+<div class="section fade-in">
       <h2>Selected Cues</h2>
       <div class="player-box">
         <div class="topbar">
@@ -266,6 +276,9 @@
 
   <script>
     window.addEventListener("load", function () {
+document.querySelectorAll(".fade-in").forEach((el, i) => {
+  setTimeout(() => el.classList.add("visible"), 200 + i * 150);
+});
       const medleyBtn = document.getElementById("medleyBtn");
       const playlistBtn = document.getElementById("playlistBtn");
       const playlistLabel = document.getElementById("playlistLabel");
