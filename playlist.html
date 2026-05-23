@@ -5,13 +5,18 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Showreel</title>
   <script src="https://unpkg.com/wavesurfer.js@7/dist/wavesurfer.min.js"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  
   <style>
     html, body {
       margin: 0;
       padding: 0;
       background: #1F1F1F;
       color: #F3EFE6;
-      font-family: Arial, sans-serif;
+      font-family: Inter, sans-serif;
     }
     .fade-in {
   opacity: 0;
@@ -38,7 +43,7 @@
     h2 {
       margin: 0 0 12px 0;
       font-size: 18px;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.08em;
       text-transform: uppercase;
       color: #F3EFE6;
     }
@@ -113,7 +118,7 @@
       background: rgba(243, 239, 230, 0.03);
       border: 1px solid rgba(243, 239, 230, 0.08);
       cursor: pointer;
-      transition: background 0.15s ease, border-color 0.15s ease;
+      transition: background 0.28s ease, border-color 0.28s ease;
     }
 
     .track-row:hover {
@@ -222,7 +227,7 @@
 
           <div class="track-row" data-file="./05%20IT%20ECHOES%20%20-%20%20I%20See%20Her%20in%20the%20Echoes%20(Ending).mp3" data-title="IT ECHOS - I See Her in the Echo (Ending)" data-subtitle="Action / orchestral">
             <div class="track-info">
-              <div class="track-title">5. IT ECHOS - I See Her in the Echo (Ending</div>
+              <div class="track-title">5. IT ECHOS - I See Her in the Echo (Ending)</div>
               <div class="track-subtitle">Bright and Interspective</div>
             </div>
             <div class="track-action"></div>
@@ -247,7 +252,7 @@
           <div class="track-row" data-file="./08%20BLACK%20BAGS%20%20-%20%20The%20Chase.mp3" data-title="BLACK BAGS - The Chase" data-subtitle="Action / orchestral">
             <div class="track-info">
               <div class="track-title">8. BLACK BAGS - The Chase</div>
-              <div class="track-subtitle">Suspenful Action</div>
+              <div class="track-subtitle">Suspenseful Action</div>
             </div>
             <div class="track-action"></div>
           </div>
@@ -296,7 +301,7 @@ document.querySelectorAll(".fade-in").forEach((el, i) => {
         container: "#medleyWave",
         height: 128,
         normalize: true,
-        waveColor: "#F3EFE6",
+        waveColor: "#D8D2C8",
         progressColor: "#8D9B8A",
         cursorColor: "#8D9B8A",
         cursorWidth: 2,
@@ -311,7 +316,7 @@ document.querySelectorAll(".fade-in").forEach((el, i) => {
         container: "#playlistWave",
         height: 128,
         normalize: true,
-        waveColor: "#F3EFE6",
+        waveColor: "#D8D2C8",
         progressColor: "#8D9B8A",
         cursorColor: "#8D9B8A",
         cursorWidth: 2,
