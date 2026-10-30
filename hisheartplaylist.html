@@ -1,0 +1,468 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Showreel</title>
+  <script src="https://unpkg.com/wavesurfer.js@7/dist/wavesurfer.min.js"></script>
+  
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  
+  <style>
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #1F1F1F;
+      color: #F3EFE6;
+      font-family: Inter, sans-serif;
+    }
+    .fade-in {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+    .wrap {
+      max-width: 700px;
+      margin: 0 auto;
+      padding: 14px;
+      box-sizing: border-box;
+    }
+
+    .section {
+      margin-bottom: 32px;
+    }
+
+    h2 {
+      margin: 0 0 12px 0;
+      font-size: 18px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: #F3EFE6;
+    }
+
+    .player-box {
+      background: rgba(243, 239, 230, 0.025);
+      border: 1px solid rgba(243, 239, 230, 0.08);
+      border-radius: 14px;
+      padding: 12px;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+      flex-wrap: wrap;
+    }
+
+    .play-btn {
+      appearance: none;
+      border: 1px solid #8D9B8A;
+      background: transparent;
+      color: #F3EFE6;
+      padding: 8px 14px;
+      border-radius: 999px;
+      font-size: 14px;
+      cursor: pointer;
+    }
+
+    .play-btn:hover {
+      background: rgba(141, 155, 138, 0.14);
+    }
+
+    .track-label {
+      font-size: 13px;
+      opacity: 0.95;
+    }
+
+    .selected-track-meta {
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      min-width: 0;
+    }
+
+    .selected-track-desc {
+      font-size: 11px;
+      color: rgba(243, 239, 230, 0.72);
+      line-height: 1.35;
+    }
+
+    .waveform {
+      width: 100%;
+      height: 128px;
+      cursor: pointer;
+    }
+
+    .playlist {
+      margin-top: 12px;
+      display: grid;
+      gap: 8px;
+    }
+
+    .track-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 12px;
+      border-radius: 10px;
+      background: rgba(243, 239, 230, 0.03);
+      border: 1px solid rgba(243, 239, 230, 0.08);
+      cursor: pointer;
+      transition: background 0.28s ease, border-color 0.28s ease;
+    }
+
+    .track-row:hover {
+      background: rgba(243, 239, 230, 0.06);
+      border-color: rgba(141, 155, 138, 0.35);
+    }
+
+    .track-row.active {
+      background: rgba(141, 155, 138, 0.12);
+      border-color: rgba(141, 155, 138, 0.55);
+    }
+
+    .track-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+      min-width: 0;
+    }
+
+    .track-title {
+      font-size: 14px;
+      color: #F3EFE6;
+    }
+
+    .track-subtitle {
+      font-size: 12px;
+      color: rgba(243, 239, 230, 0.7);
+    }
+
+    .track-action {
+      font-size: 12px;
+      color: #8D9B8A;
+      white-space: nowrap;
+      min-width: 42px;
+      text-align: right;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .status {
+      margin-top: 10px;
+      font-size: 12px;
+      color: rgba(243, 239, 230, 0.75);
+      min-height: 16px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+
+<div class="section fade-in">
+      <h2>Medley</h2>
+      <div class="player-box">
+        <div class="topbar">
+          <button id="medleyBtn" class="play-btn" type="button">Play</button>
+<div class="track-label">Featured Medley for <em>His Heart</em></div>
+        </div>
+        <div id="medleyWave" class="waveform"></div>
+      </div>
+    </div>
+
+<div class="section fade-in">
+      <h2>Selected Cues</h2>
+      <div class="player-box">
+        <div class="topbar">
+          <button id="playlistBtn" class="play-btn" type="button">Play</button>
+          <div class="selected-track-meta">
+            <div id="playlistLabel" class="track-label">Select a Track</div>
+            <div id="playlistDesc" class="selected-track-desc">Choose a cue from the list below.</div>
+          </div>
+        </div>
+
+        <div id="playlistWave" class="waveform"></div>
+
+        <div class="playlist" id="playlist">
+          <div class="track-row" data-file="./BLACKBAGS_IGettoWearNiceGloves.mp3" data-title="BLACK BAGS - I Get to Wear Nice Gloves" data-subtitle="Upbeat, Calm, and Reflective">
+            <div class="track-info">
+              <div class="track-title">1. BLACK BAGS - I Get to Wear Nice Gloves</div>
+              <div class="track-subtitle">Upbeat, Calm, and Reflective</div>
+            </div>
+            <div class="track-action"></div>
+          </div>
+
+          <div class="track-row" data-file="./PERPETUALLOVE_TheCircle.mp3" data-title="PERPETUAL LOVE - The Circle" data-subtitle="Calm, Reflective, and Mysterious">
+            <div class="track-info">
+              <div class="track-title">2. PERPETUAL LOVE - The Circle</div>
+              <div class="track-subtitle">Calm, Reflective, and Mysterious</div>
+            </div>
+            <div class="track-action"></div>
+          </div>
+
+
+          <div class="track-row" data-file="./BLACKBAGS_Cope.mp3" data-title="BLACK BAGS - Cope" data-subtitle="Conflicted and Reflective">
+            <div class="track-info">
+              <div class="track-title">3. BLACK BAGS - Cope</div>
+              <div class="track-subtitle">Conflicted and Reflective</div>
+            </div>
+            <div class="track-action"></div>
+          </div>
+
+<div class="playlist" id="playlist">
+          <div class="track-row" data-file="./ITECHOS_ISeeHerintheEcho(Beginning).mp3" data-title="IT ECHOS - I See Her in the Echo (Beginning)" data-subtitle="Lyrical / reflective">
+            <div class="track-info">
+              <div class="track-title">4. IT ECHOS - I See Her in the Echo (Beginning)</div>
+              <div class="track-subtitle">Bright, Calm, and Passionate</div>
+            </div>
+            <div class="track-action"></div>
+          </div>
+
+          <div class="track-row" data-file="./PERPETUALLOVE_YouPromised.mp3" data-title="PERPETUAL LOVE - You Promised" data-subtitle="Conflicted, Emotional, and Reflective">
+            <div class="track-info">
+              <div class="track-title">5. PERPETUAL LOVE - You Promised</div>
+              <div class="track-subtitle">Conflicted, Emotional, and Reflective</div>
+            </div>
+            <div class="track-action"></div>
+          </div>
+
+          <div class="track-row" data-file="./BLACKBAGS_WhyMe?.mp3" data-title="BLACK BAGS - Why Me?" data-subtitle="Uplifting and Dramatic">
+            <div class="track-info">
+              <div class="track-title">6. BLACK BAGS - Why Me?</div>
+              <div class="track-subtitle">Uplifting and Dramatic</div>
+            </div>
+            <div class="track-action"></div>
+          </div>
+
+          <div class="track-row" data-file="./PERPETUALLOVE_ImJustHappyTodaystheDay.mp3" data-title="PERPETUAL LOVE - I'm Just Happy Today's the Day!" data-subtitle="Hopeful and Triumphant">
+            <div class="track-info">
+              <div class="track-title">7. PERPETUAL LOVE - I'm Just Happy Today's the Day!</div>
+              <div class="track-subtitle">Hopeful and Triumphant</div>
+            </div>
+            <div class="track-action"></div>
+          </div>
+
+          <div class="track-row" data-file="./PERPETUALLOVE_ItDoesntGoAway.mp3" data-title="PERPETUAL LOVE - It Doesn't Go Away" data-subtitle="Dark, Introspective, and Dramatic">
+            <div class="track-info">
+              <div class="track-title">8. PERPETUAL LOVE - It Doesn't Go Away</div>
+              <div class="track-subtitle">Dark, Introspective, and Dramatic</div>
+            </div>
+            <div class="track-action"></div>
+          </div>
+
+          <div class="track-row" data-file="./ITECHOS_ISeeHerintheEcho(Ending).mp3" data-title="IT ECHOS - I See Her in the Echo (Ending)" data-subtitle="Bright, Passionate, and Climatic">
+            <div class="track-info">
+              <div class="track-title">9. IT ECHOS - I See Her in the Echo (Ending)</div>
+              <div class="track-subtitle">Bright, Passionate, and Climatic</div>
+            </div>
+            <div class="track-action"></div>
+          </div>
+
+          <div class="track-row" data-file="./PERPETUALLOVE_TheBestDayEver_ItIsWell.mp3" data-title="PERPETUAL LOVE - The Best Day Ever/It Is Well" data-subtitle="Fun, Exciting, and Energetic/Tender, Melancholic, and Nostalgic">
+            <div class="track-info">
+              <div class="track-title">10. PERPETUAL LOVE - The Best Day Ever/It Is Well</div>
+              <div class="track-subtitle">Fun, Exciting, and Energetic/Tender, Melancholic, and Nostalgic</div>
+            </div>
+            <div class="track-action"></div>
+          </div>
+
+        </div>
+
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    window.addEventListener("load", function () {
+document.querySelectorAll(".fade-in").forEach((el, i) => {
+  setTimeout(() => el.classList.add("visible"), 200 + i * 350);
+});
+      const medleyBtn = document.getElementById("medleyBtn");
+      const playlistBtn = document.getElementById("playlistBtn");
+      const playlistLabel = document.getElementById("playlistLabel");
+      const playlistDesc = document.getElementById("playlistDesc");
+      const trackRows = Array.from(document.querySelectorAll(".track-row"));
+
+function formatTime(seconds) {
+  if (!isFinite(seconds)) return "--:--";
+  const mins = Math.floor(seconds / 60);
+  const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
+  return `${mins}:${secs}`;
+}
+
+      const medleyPlayer = WaveSurfer.create({
+        container: "#medleyWave",
+        height: 128,
+        normalize: true,
+        waveColor: "#D8D2C8",
+        progressColor: "#8D9B8A",
+        cursorColor: "#8D9B8A",
+        cursorWidth: 2,
+        fillParent: true,
+        interact: true,
+        autoScroll: true,
+        autoCenter: true,
+        url: "./ShowreelMedleyOct2026.mp3"
+      });
+
+      const playlistPlayer = WaveSurfer.create({
+        container: "#playlistWave",
+        height: 128,
+        normalize: true,
+        waveColor: "#D8D2C8",
+        progressColor: "#8D9B8A",
+        cursorColor: "#8D9B8A",
+        cursorWidth: 2,
+        fillParent: true,
+        interact: true,
+        autoScroll: true,
+        autoCenter: true
+      });
+
+      function pauseOtherPlayers(active) {
+        if (active !== medleyPlayer && medleyPlayer.isPlaying()) medleyPlayer.pause();
+        if (active !== playlistPlayer && playlistPlayer.isPlaying()) playlistPlayer.pause();
+      }
+
+      function clearActiveTracks() {
+        trackRows.forEach(row => row.classList.remove("active"));
+      }
+
+      medleyBtn.addEventListener("click", function () {
+        pauseOtherPlayers(medleyPlayer);
+        medleyPlayer.playPause();
+      });
+
+      playlistBtn.addEventListener("click", function () {
+        pauseOtherPlayers(playlistPlayer);
+        playlistPlayer.playPause();
+      });
+
+      medleyPlayer.on("interaction", function () {
+        pauseOtherPlayers(medleyPlayer);
+        if (!medleyPlayer.isPlaying()) medleyPlayer.play();
+      });
+
+      playlistPlayer.on("interaction", function () {
+        pauseOtherPlayers(playlistPlayer);
+        if (!playlistPlayer.isPlaying()) playlistPlayer.play();
+      });
+
+      medleyPlayer.on("play", function () {
+        medleyBtn.textContent = "Pause";
+      });
+
+      medleyPlayer.on("pause", function () {
+        medleyBtn.textContent = "Play";
+      });
+
+      medleyPlayer.on("finish", function () {
+        medleyBtn.textContent = "Play";
+      });
+
+      playlistPlayer.on("play", function () {
+        playlistBtn.textContent = "Pause";
+      });
+
+      playlistPlayer.on("pause", function () {
+        playlistBtn.textContent = "Play";
+      });
+
+      playlistPlayer.on("finish", function () {
+        playlistBtn.textContent = "Play";
+      });
+
+      trackRows.forEach(function (row) {
+        const action = row.querySelector(".track-action");
+        const file = row.dataset.file;
+
+        if (action) action.textContent = "--:--";
+
+        const audio = new Audio();
+        audio.preload = "metadata";
+        audio.src = file;
+
+        audio.addEventListener("loadedmetadata", function () {
+          if (action) action.textContent = formatTime(audio.duration);
+        });
+
+        audio.addEventListener("error", function () {
+          if (action) action.textContent = "--:--";
+        });
+
+        row.addEventListener("click", function () {
+          const file = row.dataset.file;
+          const title = row.dataset.title;
+          const subtitle = row.dataset.subtitle || "";
+
+          pauseOtherPlayers(playlistPlayer);
+          clearActiveTracks();
+          row.classList.add("active");
+
+          playlistLabel.textContent = title;
+          playlistDesc.textContent = subtitle ? subtitle : "";
+
+playlistPlayer.load(file).then(function () {
+  playlistPlayer.play();
+});
+});
+});
+
+
+      const firstTrack = trackRows[0];
+
+      if (firstTrack) {
+        const file = firstTrack.dataset.file;
+        const title = firstTrack.dataset.title;
+        const subtitle = firstTrack.dataset.subtitle || "";
+
+        firstTrack.classList.add("active");
+        playlistLabel.textContent = title;
+        playlistDesc.textContent = subtitle ? subtitle : "";
+
+        playlistPlayer.load(file);
+      }
+
+      playlistPlayer.on("error", function (err) {
+      });
+
+      medleyPlayer.on("error", function (err) {
+      });
+    });
+  </script>
+
+<script>
+(function () {
+  function sendHeight() {
+    const height = Math.ceil(
+      document.documentElement.getBoundingClientRect().height
+    );
+
+    window.parent.postMessage({
+      type: "showreel-height",
+      height: height
+    }, "*");
+  }
+
+  window.addEventListener("load", sendHeight);
+
+  const observer = new ResizeObserver(sendHeight);
+  observer.observe(document.documentElement);
+
+  sendHeight();
+})();
+</script>
+
+</body>
+</html>
+
