@@ -294,7 +294,7 @@ document.querySelectorAll(".fade-in").forEach((el, i) => {
         if (!isFinite(seconds)) return "--:--";
         const mins = Math.floor(seconds / 60);
         const secs = Math.floor(seconds % 60).toString().padStart(2, "0");
-        return `mins:{secs}`;
+        return `${mins}:${secs}`;
       }
 
       const medleyPlayer = WaveSurfer.create({
