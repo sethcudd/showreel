@@ -19,7 +19,7 @@
       font-family: Inter, sans-serif;
     }
     .fade-in {
-  opacity: 1;
+  opacity: 0;
   transform: translateY(8px);
   transition: opacity 0.8s ease, transform 0.8s ease;
 }
@@ -428,6 +428,7 @@ function formatTime(seconds) {
 
 playlistPlayer.load(file).then(function () {
   playlistPlayer.play();
+});
 });
 });
 
