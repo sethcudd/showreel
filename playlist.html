@@ -454,6 +454,29 @@ playlistPlayer.load(file).then(function () {
       });
     });
   </script>
+
+<script>
+(function () {
+  function sendHeight() {
+    const height = Math.ceil(
+      document.documentElement.getBoundingClientRect().height
+    );
+
+    window.parent.postMessage({
+      type: "showreel-height",
+      height: height
+    }, "*");
+  }
+
+  window.addEventListener("load", sendHeight);
+
+  const observer = new ResizeObserver(sendHeight);
+  observer.observe(document.documentElement);
+
+  sendHeight();
+})();
+</script>
+
 </body>
 </html>
 
